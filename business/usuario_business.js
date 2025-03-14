@@ -3,7 +3,7 @@ const { Usuario } = require("../models");
 
 
 const crearUsuario = async (datosUsuario) => { //Objeto de JS
-  const usuario = new Usuario(datosUsuario.nombre, datosUsuario.primerApellido, datosUsuario.segundoApellido, datosUsuario.fechaDeNacimiento);
+  const usuario = new Usuario(datosUsuario.nombre, datosUsuario.primerApellido, datosUsuario.segundoApellido, datosUsuario.fechaDeNacimiento, datosUsuario.correo, datosUsuario.password);
   //Inicio de usuarios duplicados.
   //Fin de usuarios duplicados.
   const usuarioCreado = await usuarioRepository.agregarNuevoUsuario(usuario);
@@ -30,10 +30,15 @@ const eliminarUsuario = async (idUsuario) => {
   return eliminarUsuario;
 };
 
+const obtenerUsuarioPorCorreo = async (correo) => {
+  return usuarioRepository.obtenerUsuarioPorCorreo(correo);
+}
+
 module.exports = {
   crearUsuario,
   obtenerUsuarioPorId,
   obtenerUsuarios,
   modificarUsuario,
   eliminarUsuario,
+  obtenerUsuarioPorCorreo
 };

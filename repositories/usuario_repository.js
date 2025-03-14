@@ -19,6 +19,8 @@ const agregarNuevoUsuario = async (usuario) => {
       fechaDeNacimiento: usuario.getFechaDeNacimiento,
       estaActivo: usuario.getEstaActivo,
       fechaDeRegistro: usuario.getFechaDeRegistro,
+      correo: usuario.getCorreo,
+      password: usuario.getPassword
       // otros: usuario.getOtros,
     });
 
@@ -116,10 +118,25 @@ const eliminarUsuario = async (idUsuario) => {
   }
 };
 
+const obtenerUsuarioPorCorreo = async (correo) => {
+  try {
+    const db = await dbMongo.conexionDb();
+    const dbCollection = db.collection(COLLECTION);
+    const usuario = await dbCollection.findOne({
+      correo,
+      estaActivo: true,
+    });
+    return usuario;
+  } catch (error) {
+    console.log("Ocurrio un error para agregar obtener el usuario: ", error);
+  }
+}
+
 module.exports = {
   agregarNuevoUsuario,
   obtenerUsuarioPorId,
   obtenerUsuarios,
   modificarUsuario,
   eliminarUsuario,
+  obtenerUsuarioPorCorreo
 };

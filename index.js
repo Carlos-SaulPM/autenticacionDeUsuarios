@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(morgan("tiny"));
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json())
+app.use(cookieParser())
 
 //Routers
 app.use("/api", usuarioRoute);

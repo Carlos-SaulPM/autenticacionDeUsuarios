@@ -1,12 +1,27 @@
-class Usuario{
-  constructor(nombre, primerApellido, segundoApellido, fechaDeNacimiento) {
+class Usuario {
+  constructor(
+    nombre,
+    primerApellido,
+    segundoApellido,
+    fechaDeNacimiento,
+    correo,
+    password
+  ) {
     this.nombre = nombre;
     this.primerApellido = primerApellido;
     this.segundoApellido = segundoApellido;
     this.fechaDeNacimiento = fechaDeNacimiento;
-    //Se asigna nulo si es creacion de usuario nuevo
     this.estaActivo = true;
     this.fechaDeRegistro = new Date();
+    this.correo = correo;
+    this.password = password;
+  }
+
+  get getEncodedKey() {
+    return this.encodedKey;
+  }
+  get getId() {
+    return Number(this.id);
   }
 
   get getNombre() {
@@ -25,10 +40,6 @@ class Usuario{
     return this.fechaDeNacimiento;
   }
 
-  get getEncodedKey() {
-    return this.encodedKey;
-  }
-
   get getEstaActivo() {
     return this.estaActivo;
   }
@@ -37,8 +48,12 @@ class Usuario{
     return this.fechaDeRegistro;
   }
 
-  get getId() {
-    return Number(this.id);
+  get getCorreo() {
+    return this.correo;
+  }
+
+  get getPassword() {
+    return this.password;
   }
 
   getOtros(stringPropiedad) {
@@ -52,8 +67,15 @@ class Usuario{
   set setId(id) {
     this.id = id;
   }
-  
-  
+  set setEncodedKey(encodedKey) {
+    this.encodedKey = encodedKey;
+  }
+  set setCorreo(correo) {
+    this.correo = correo;
+  }
+  set setPassword(password) {
+    this.password = password;
+  }
 }
 
 module.exports = Usuario;

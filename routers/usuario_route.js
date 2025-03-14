@@ -6,6 +6,7 @@ const { usuarioMiddleware } = require("../middlewares");
 router.post(
   "/usuarios/register",
   usuarioMiddleware.validacionCrearUsuario,
+  usuarioMiddleware.encriptarPassword,
   usuarioController.crearUsuario
 );
 router.get(
@@ -27,6 +28,17 @@ router.get(
   "/usuarios/eliminar/:id",
   usuarioMiddleware.validacionEliminarUsuario,
   usuarioController.eliminarUsuario
+);
+
+router.post("/usuarios/login", usuarioController.loginUsuario);
+
+router.post("/usuarios/logout", usuarioController.logoutUsuario);
+
+router.get(
+  "/usuarios/perfil/:id",
+  usuarioMiddleware.validacionToken,
+  usuarioMiddleware.validacionObtenerUsuarioPorId,
+  usuarioController.obtenerUsuarioPorId
 );
 
 module.exports = router;
