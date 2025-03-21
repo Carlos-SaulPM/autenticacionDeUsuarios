@@ -1,0 +1,78 @@
+<%- include('../templates/head') %>
+
+<main class="content">
+  <div class="container-fluid p-0">
+    <h1 class="h3 mb-3"><strong>Agregar</strong> Usuario</h1>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title mb-0">Usuario</h5>
+          </div>
+          <div class="card-body">
+            <form action="/mvc/usuarios/agregar" method="post">
+              <label class="form-label" for="nombre">Nombre:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Alejandro"
+                id="nombre"
+                name="nombre"
+              />
+              <label class="form-label" for="primerApellido"
+                >Primer apellido:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Perez"
+                id="primerApellido"
+                name="primerApellido"
+              />
+              <label class="form-label" for="segundoApellido"
+                >Segundo apellido:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Torres"
+                id="segundoApellido"
+                name="segundoApellido"
+              />
+              <label class="form-label" for="fechaDeNacimiento"
+                >Fecha de nacimiento:</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="fechaDeNacimiento"
+                name="fechaDeNacimiento"
+              />
+              <label class="form-label" for="correo">Correo:</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="correo@dominio.org"
+                id="correo"
+                name="correo"
+              />
+              <label class="form-label" for="password">Password:</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="******"
+                id="password"
+                name="password"
+              />
+              <br>
+              <input type="submit" class="btn btn-success" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('../templates/foot') %>

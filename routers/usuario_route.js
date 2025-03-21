@@ -41,4 +41,6 @@ router.get(
   usuarioController.obtenerUsuarioPorId
 );
 
+
+
 module.exports = router;

@@ -1,0 +1,41 @@
+<%- include('../templates/head') %>
+
+<main class="content">
+  <div class="container-fluid p-0">
+    <h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title mb-0">Empty card</h5>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Primer Apellido</th>
+                  <th>Segundo Apellido</th>
+                  <th>Fecha de nacimiento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for( let index = 0; index < usuarios.lista.length; index++ ) { %>
+                  <tr>
+                    <td><%= usuarios.lista[index].nombre %></td>
+                    <td><%= usuarios.lista[index].primerApellido %></td>
+                    <td><%= usuarios.lista[index].segundoApellido %></td>
+                    <td><%= usuarios.lista[index].fechaDeNacimiento.toISOString().split('T')[0]; %></td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('../templates/foot') %>

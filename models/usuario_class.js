@@ -10,7 +10,7 @@ class Usuario {
     this.nombre = nombre;
     this.primerApellido = primerApellido;
     this.segundoApellido = segundoApellido;
-    this.fechaDeNacimiento = fechaDeNacimiento;
+    this.fechaDeNacimiento = new Date(fechaDeNacimiento);
     this.estaActivo = true;
     this.fechaDeRegistro = new Date();
     this.correo = correo;

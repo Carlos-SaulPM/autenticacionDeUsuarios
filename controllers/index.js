@@ -1,2 +1,3 @@
 const usuarioController = require("./usuario_controller");
-module.exports = { usuarioController };
+const usuarioMVCController = require("./usuarioMVC_controller");
+module.exports = { usuarioController, usuarioMVCController };
