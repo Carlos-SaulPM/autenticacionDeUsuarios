@@ -74,11 +74,9 @@ const validacionModificarUsuario = (req, res, next) => {
   };
 
   const { error, value } = esquema.validate(datos, { convert: true });
-  if (error)
-    return res.status(404).json({
-      mensaje: "No proporcionaste algun dato valido",
-      error: error.details[0].message,
-    });
+ if (error)
+  return res.render("templates/error404");
+ 
   req.params.id = value.id;
   req.body.otros = value.otros;
   req.body.estaActivo = value.estaActivo;

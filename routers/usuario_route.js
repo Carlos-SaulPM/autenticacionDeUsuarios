@@ -17,16 +17,16 @@ router.get(
   usuarioMiddleware.validacionObtenerUsuarioPorId,
   usuarioController.obtenerUsuarioPorId
 );
-// router.get(
-//   "/",
-//   usuarioMiddleware.validacionObtenerUsuarios,
-//   usuarioController.obtenerUsuarios
-// );
-// router.put(
-//   "/modificar/:id",
-//   usuarioMiddleware.validacionModificarUsuario,
-//   usuarioController.modificarUsuario
-// );
+router.get(
+  "/",
+  usuarioMiddleware.validacionObtenerUsuarios,
+  usuarioController.obtenerUsuarios
+);
+router.put(
+  "/modificar/:id",
+  usuarioMiddleware.validacionModificarUsuario,
+  usuarioController.modificarUsuario
+);
 // router.get(
 //   "/eliminar/:id",
 //   usuarioMiddleware.validacionEliminarUsuario,

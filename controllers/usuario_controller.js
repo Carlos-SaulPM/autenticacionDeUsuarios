@@ -25,25 +25,20 @@ const guardarUsuario = async (req, res) => {
   // res.cookie("token", token);
 
   res.redirect("usuarios");
-}
+};
 
-// Falta pagina para renderizar view
 const obtenerUsuarioPorId = async (req, res) => {
   //console.log(typeof req.params.id);
   let usuarioEncontrado = await usuarioBusiness.obtenerUsuarioPorId(
     req.params.id
   );
-  if (!usuarioEncontrado)
-    return res.status(404).json({ mensajeError: "No se encontro el usuario" });
-  res.status(200).json(usuarioEncontrado);
+  res.render("usuarios", { usuarioEncontrado });
 };
 
 const obtenerUsuarios = async (req, res) => {
   const { pagina, limite } = req.query;
   const usuarios = await usuarioBusiness.obtenerUsuarios(pagina, limite);
-  res.render("usuarios/index", {
-    usuarios,
-  });
+  res.render("usuarios", {usuarios});
 };
 
 const modificarUsuario = async (req, res) => {

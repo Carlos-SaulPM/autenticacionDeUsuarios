@@ -81,7 +81,9 @@ const modificarUsuario = async (datosAModificar) => {
     );
 
     const propiedadesPermitidas = [
-      "estaActivo",
+     "estaActivo",
+     "correo",
+     //"password",
       "otros"
     ];
     const datosAActualizar = {};
