@@ -3,44 +3,45 @@ const router = express.Router();
 const { usuarioController } = require("../controllers");
 const { usuarioMiddleware } = require("../middlewares");
 
+router.get("/register", usuarioController.crearUsuario);
+
 router.post(
-  "/usuarios/register",
+  "/register",
   usuarioMiddleware.validacionCrearUsuario,
   usuarioMiddleware.encriptarPassword,
-  usuarioController.crearUsuario
+  usuarioController.guardarUsuario
 );
+
 router.get(
-  "/usuarios/:id",
+  "/:id",
   usuarioMiddleware.validacionObtenerUsuarioPorId,
   usuarioController.obtenerUsuarioPorId
 );
-router.get(
-  "/usuarios/",
-  usuarioMiddleware.validacionObtenerUsuarios,
-  usuarioController.obtenerUsuarios
-);
-router.put(
-  "/usuarios/modificar/:id",
-  usuarioMiddleware.validacionModificarUsuario,
-  usuarioController.modificarUsuario
-);
-router.get(
-  "/usuarios/eliminar/:id",
-  usuarioMiddleware.validacionEliminarUsuario,
-  usuarioController.eliminarUsuario
-);
+// router.get(
+//   "/",
+//   usuarioMiddleware.validacionObtenerUsuarios,
+//   usuarioController.obtenerUsuarios
+// );
+// router.put(
+//   "/modificar/:id",
+//   usuarioMiddleware.validacionModificarUsuario,
+//   usuarioController.modificarUsuario
+// );
+// router.get(
+//   "/eliminar/:id",
+//   usuarioMiddleware.validacionEliminarUsuario,
+//   usuarioController.eliminarUsuario
+// );
 
-router.post("/usuarios/login", usuarioController.loginUsuario);
+// router.post("/login", usuarioController.loginUsuario);
 
-router.post("/usuarios/logout", usuarioController.logoutUsuario);
+// router.post("/logout", usuarioController.logoutUsuario);
 
-router.get(
-  "/usuarios/perfil/:id",
-  usuarioMiddleware.validacionToken,
-  usuarioMiddleware.validacionObtenerUsuarioPorId,
-  usuarioController.obtenerUsuarioPorId
-);
-
-
+// router.get(
+//   "/perfil/:id",
+//   usuarioMiddleware.validacionToken,
+//   usuarioMiddleware.validacionObtenerUsuarioPorId,
+//   usuarioController.obtenerUsuarioPorId
+// );
 
 module.exports = router;

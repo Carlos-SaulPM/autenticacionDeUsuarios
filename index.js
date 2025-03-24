@@ -8,7 +8,7 @@ const path = require("path");
 require("dotenv").config();
 
 //Routers import
-const { usuarioRoute, homeRoute, usuarioMVCRoute } = require("./routers");
+const { usuarioApiRoute, homeRoute, usuarioRoute } = require("./routers");
 //Configuraciones y constantes
 const port = process.env.PORT;
 
@@ -37,9 +37,9 @@ app.use((req, res, next) => {
 });
 
 //Routers
-app.use("/api", usuarioRoute);
+app.use("/api", usuarioApiRoute);
 app.use("/", homeRoute);
-app.use("/mvc", usuarioMVCRoute);
+app.use("/usuarios", usuarioRoute);
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);

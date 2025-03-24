@@ -12,10 +12,13 @@ const validacionCrearUsuario = (req, res, next) => {
     password: Joi.string().min(8).max(25).required(),
   });
 
-  const { error, value } = esquema.validate(req.body, { convert: true });
+  const { error, value } = esquema.validate(req.body);
 
   if (error)
-    return res.render("usuarios/agregar", { error: "Ocurrio un error" });
+    return res.status(400).json({
+      mensaje: "No proporcionaste los datos correctos",
+      error: error.details[0].message,
+    });
   req.body = value;
   next();
 };
@@ -29,8 +32,9 @@ const validacionObtenerUsuarioPorId = (req, res, next) => {
 
   const { error, value } = esquema.validate(req.params, { convert: true });
   if (error)
-    return res.render("usuarios", {
-      error: "No proporcionaste el Id o encodedKey valido",
+    return res.status(400).json({
+      mensaje: "No proporcionaste el Id o encodedKey valido",
+      error: error.details[0].message,
     });
 
   req.params = value;
@@ -108,7 +112,11 @@ const encriptarPassword = async (req, res, next) => {
       req.body.password = password;
     })
     .catch((error) => {
-      res.render("usuarios/register", {error: "Ocurrio un error"});
+      res
+        .status(400)
+        .json({
+          mensajeError: "Ocurrio un error con la encriptacion de la contrasena",
+        });
     });
   next();
 };

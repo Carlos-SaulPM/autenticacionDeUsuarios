@@ -65,7 +65,14 @@
                 id="password"
                 name="password"
               />
-              <br>
+              <br />
+              <% if (error) { %>
+                <div>
+                  <p class="text-warning">
+                    <strong>No completaste correctamente los datos</strong>
+                  </p>
+                </div>
+              <% } %>
               <input type="submit" class="btn btn-success" />
             </form>
           </div>
