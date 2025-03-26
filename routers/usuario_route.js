@@ -3,10 +3,10 @@ const router = express.Router();
 const { usuarioController } = require("../controllers");
 const { usuarioMiddleware } = require("../middlewares");
 
-router.get("/register", usuarioController.crearUsuario);
+router.get("/crear", usuarioController.crearUsuario);
 
 router.post(
-  "/register",
+  "/guardar",
   usuarioMiddleware.validacionCrearUsuario,
   usuarioMiddleware.encriptarPassword,
   usuarioController.guardarUsuario
@@ -22,26 +22,24 @@ router.get(
   usuarioMiddleware.validacionObtenerUsuarios,
   usuarioController.obtenerUsuarios
 );
+
+router.get(
+  "/modificar/:id",
+  usuarioMiddleware.validacionModificarUsuario,
+  usuarioController.modificandoUsuario
+);
 router.put(
   "/modificar/:id",
   usuarioMiddleware.validacionModificarUsuario,
   usuarioController.modificarUsuario
 );
-// router.get(
-//   "/eliminar/:id",
-//   usuarioMiddleware.validacionEliminarUsuario,
-//   usuarioController.eliminarUsuario
-// );
 
-// router.post("/login", usuarioController.loginUsuario);
+router.get(
+  "/eliminar/:id",
+  usuarioMiddleware.validacionEliminarUsuario,
+  usuarioController.eliminarUsuario
+);
 
-// router.post("/logout", usuarioController.logoutUsuario);
 
-// router.get(
-//   "/perfil/:id",
-//   usuarioMiddleware.validacionToken,
-//   usuarioMiddleware.validacionObtenerUsuarioPorId,
-//   usuarioController.obtenerUsuarioPorId
-// );
 
 module.exports = router;

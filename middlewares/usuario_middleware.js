@@ -9,13 +9,13 @@ const validacionCrearUsuario = (req, res, next) => {
     segundoApellido: Joi.string().min(2).max(20).required(),
     fechaDeNacimiento: Joi.date().iso().min("1920-01-01").required(),
     correo: Joi.string().email().required(),
-    password: Joi.string().min(8).max(25).required(),
+    password: Joi.string().min(5).max(25).required(),
   });
 
   const { error, value } = esquema.validate(req.body, { convert: true });
 
   if (error)
-    return res.render("usuarios/agregar", { error: "Ocurrio un error" });
+    return res.render("usuarios/crear", { error: "Ocurrio un error" });
   req.body = value;
   next();
 };
@@ -29,7 +29,7 @@ const validacionObtenerUsuarioPorId = (req, res, next) => {
 
   const { error, value } = esquema.validate(req.params, { convert: true });
   if (error)
-    return res.render("usuarios", {
+    return res.render("templates/error404", {
       error: "No proporcionaste el Id o encodedKey valido",
     });
 
@@ -91,10 +91,7 @@ const validacionEliminarUsuario = (req, res, next) => {
 
   const { error, value } = esquema.validate(req.params, { convert: true });
   if (error)
-    return res.status(404).json({
-      mensaje: "No es un id valido",
-      error: error.details[0].message,
-    });
+    return res.render("templates/error404", {error:"Ocurrio un error al eliminar el usuario"})
   req.params.id = value.id;
   next();
 };

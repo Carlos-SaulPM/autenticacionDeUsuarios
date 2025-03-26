@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { auth } = require("../middlewares");
+const { auth, usuarioMiddleware } = require("../middlewares");
+const { usuarioBusiness } = require("../business");
 
 //USUARIOS FICTICIOS
 const userCredentials = [
@@ -27,12 +28,12 @@ const userCredentials = [
 const obtenerUsuarioPorCorreo = (email) => {
   //Simulacion de busqueda en la base de datos
   let user = userCredentials.find((x) => x.email == email);
-  console.log("USER: ", user);
+  //console.log("USER: ", user);
   return user;
 };
 const compararContrasena = (password, passwordHash) => {
   //Se realiza el hasheo del password
-  console.log(`passwordBODY: ${password}, passwordHash: ${passwordHash}`);
+  //console.log(`passwordBODY: ${password}, passwordHash: ${passwordHash}`);
   let hash = password;
   return hash == passwordHash ? true : false;
 };
@@ -54,7 +55,7 @@ router.get("/logout", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   const { email, password } = req.body;
   if (!email || !password) {
     console.log("Credenciales vacias");
@@ -78,13 +79,21 @@ router.post("/login", (req, res) => {
 
 //Sidebar
 router.get("/", auth.userLogged, (req, res) => {
-  console.log(req.session.user);
+  //console.log(req.session.user);
   res.render("dashboard", { user: req.session.user });
 });
 
-router.get("/profile", auth.userLogged, (req, res) => {
-  res.render("profile");
-});
+router.get(
+  "/profile",
+  auth.userLogged,
+  async(req, res) => {
+    const { id } = res.locals.user;
+    console.log(`Datos RES LOCAL: `, res.locals);
+    const usuario = await usuarioBusiness.obtenerUsuarioPorId(id);
+    console.log(`Datos usuariio: `, usuario)
+    res.render("profile", {usuario});
+  }
+);
 
 router.get("/page_blank", auth.userLogged, (req, res) => {
   res.render("pageBlank");

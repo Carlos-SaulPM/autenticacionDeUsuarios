@@ -1,0 +1,29 @@
+<%- include('../templates/head') %>
+
+<main class="content">
+  <div class="container-fluid p-0">
+    <h1 class="h3 mb-3"><strong>Lista usuarios</strong>/crear usuario</h1>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title mb-0">Datos del usuario</h5>
+          </div>
+          <div class="card-body">
+            <form action="/usuarios/modificar" method="put">
+              <label class="form-label" for="correo">Correo:</label>
+              <input type="email" class="form-control" placeholder="correo@dominio.org" id="correo" name="correo" value="<%= usuario.correo %>"/>
+              <label class="form-label" for="password">Password:</label>
+              <input type="text" class="form-control" placeholder="******" id="password" name="password" value="<%= usuario.password %>" />
+              <br />
+              <input type="submit" class="btn btn-success" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('../templates/foot') %>

@@ -1,8 +1,7 @@
 const { usuarioBusiness } = require("../business");
 
-//----
 const crearUsuario = async (req, res) => {
-  res.render("usuarios/crear");
+  res.render("usuarios/crear", { error: null });
 };
 
 const guardarUsuario = async (req, res) => {
@@ -24,7 +23,7 @@ const guardarUsuario = async (req, res) => {
   // const token = await token_jwt.crearToken({ correo: datosDelUsuario.correo });
   // res.cookie("token", token);
 
-  res.redirect("usuarios");
+  res.redirect("/usuarios");
 };
 
 const obtenerUsuarioPorId = async (req, res) => {
@@ -38,7 +37,7 @@ const obtenerUsuarioPorId = async (req, res) => {
 const obtenerUsuarios = async (req, res) => {
   const { pagina, limite } = req.query;
   const usuarios = await usuarioBusiness.obtenerUsuarios(pagina, limite);
-  res.render("usuarios", {usuarios});
+  res.render("usuarios", { usuarios });
 };
 
 const modificarUsuario = async (req, res) => {
@@ -50,19 +49,26 @@ const modificarUsuario = async (req, res) => {
     otros,
   });
   if (!usuarioModificado)
-    return res
-      .status(404)
-      .json({ mensajeError: "No se pudo modificar los datos" });
+    return res.render("templates/error404", {
+      error: "Ocurrio un error al modificar el usuario",
+    });
   res.redirect("/usuarios");
+};
+
+const modificandoUsuario = async (req, res) => {
+  const { id } = req.params;
+  const usuario = await usuarioBusiness.obtenerUsuarioPorId(id);
+  if (!usuario) return res.render("templates/error404");
+  res.render("usuarios/modificar", { usuario });
 };
 
 const eliminarUsuario = async (req, res) => {
   const usuarioEliminado = await usuarioBusiness.eliminarUsuario(req.params.id);
   if (!usuarioEliminado)
-    return res
-      .status(404)
-      .json({ mensajeError: "No se encontro el usuario con ese id" });
-  res.redirect("/usuarios/");
+    return res.render("templates/error404", {
+      error: "Ocurrio un error en la eliminación del usuario",
+    });
+  res.redirect("/usuarios");
 };
 
 module.exports = {
@@ -72,4 +78,5 @@ module.exports = {
   obtenerUsuarios,
   modificarUsuario,
   eliminarUsuario,
+  modificandoUsuario,
 };
